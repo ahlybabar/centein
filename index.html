@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>For Centein — A Love Letter</title>
+  <meta name="description" content="A private, handcrafted love letter for Centein." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- AMBIENT PARTICLE CANVAS                      -->
+  <!-- ============================================ -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- ============================================ -->
+  <!-- SCENE 1: OPENING / INTRO                     -->
+  <!-- ============================================ -->
+  <section id="scene-intro" class="scene active" aria-label="Introduction">
+    <div class="intro-content">
+      <p class="intro-pretext" id="intro-pretext">a letter</p>
+      <h1 class="intro-name" id="intro-name">
+        <!-- Her name, revealed letter by letter -->
+        <span class="intro-label">For</span>
+        <span class="intro-her-name" id="her-name-text">Centein</span>
+      </h1>
+      <p class="intro-from" id="intro-from">from Ahly</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SCENE 2: THE ENVELOPE                        -->
+  <!-- ============================================ -->
+  <section id="scene-envelope" class="scene" aria-label="The Envelope">
+    <div class="envelope-wrapper" id="envelope-wrapper">
+      <!-- The envelope -->
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open the envelope">
+        <!-- Back flap (opens) -->
+        <div class="envelope-flap" id="envelope-flap">
+          <div class="envelope-flap-inner"></div>
+        </div>
+        <!-- Body -->
+        <div class="envelope-body">
+          <!-- Letter peeking inside -->
+          <div class="envelope-letter-inside" id="envelope-letter-inside">
+            <div class="letter-peek"></div>
+          </div>
+          <!-- Front face -->
+          <div class="envelope-front">
+            <!-- Wax Seal -->
+            <div class="wax-seal" id="wax-seal">
+              <div class="wax-seal-inner">
+                <span class="seal-heart">&#10084;</span>
+              </div>
+              <div class="wax-seal-crack wax-crack-left"></div>
+              <div class="wax-seal-crack wax-crack-right"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soft prompt -->
+      <p class="envelope-prompt" id="envelope-prompt">tap to open</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SCENE 3: THE LETTER                          -->
+  <!-- ============================================ -->
+  <section id="scene-letter" class="scene" aria-label="The Love Letter">
+    <div class="letter-scroll-container" id="letter-scroll">
+      <article class="letter-card" id="letter-card">
+        <div class="letter-card-inner">
+          <!-- Letter header -->
+          <header class="letter-header">
+            <div class="letter-ornament">✦</div>
+            <h2 class="letter-salutation" id="letter-salutation">My Dearest Centein,</h2>
+          </header>
+
+          <!-- Letter body — each <p> will animate in -->
+          <div class="letter-body" id="letter-body">
+            <p class="letter-paragraph">From the moment our paths crossed, the world seemed to arrange itself around your laughter. You turned ordinary days into stories worth keeping, and silence into something safe and warm.</p>
+            <p class="letter-paragraph">There is a calm in knowing you are my home. Whatever roads we wander, however the seasons change, my favorite place has always been beside you.</p>
+            <p class="letter-paragraph">I made this letter because words on paper can be kept in a drawer for fifty years, read by candlelight when our hair is silver and our memories are long. I want this promise to live with you forever.</p>
+            <p class="letter-paragraph">You are the dream I never knew to ask for, and the reality I will spend the rest of my life cherishing. I choose you, every morning, in every life, without hesitation.</p>
+            <p class="letter-paragraph">Thank you for being my anchor, my partner, and the love of my life.</p>
+          </div>
+
+          <!-- Letter closing -->
+          <footer class="letter-footer">
+            <p class="letter-closing">Forever yours,</p>
+            <p class="letter-signature">Ahly</p>
+            <div class="letter-ornament">✦</div>
+          </footer>
+        </div>
+      </article>
+
+      <!-- Optional Keepsake Photos (revealed only if photos are specified) -->
+      <div class="keepsake-photos-section" id="keepsake-photos-section" style="display: none;">
+        <div class="keepsake-photos-grid" id="keepsake-photos-grid"></div>
+      </div>
+
+      <!-- ============================================ -->
+      <!-- VOICE MEMOS                                  -->
+      <!-- ============================================ -->
+      <div class="voice-memos-section" id="voice-memos-section">
+        <h3 class="memos-heading">
+          <span class="memos-heading-ornament">♡</span>
+          Something I wanted to say
+          <span class="memos-heading-ornament">♡</span>
+        </h3>
+
+        <!-- Voice Memo 1 -->
+        <div class="voice-memo" id="voice-memo-1" data-memo="1">
+          <div class="memo-label">
+            <span class="memo-number">I</span>
+            <span class="memo-title">{{MEMO_1_LABEL}}</span>
+          </div>
+          <div class="memo-player">
+            <button class="memo-play-btn" id="play-btn-1" aria-label="Play voice memo 1">
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21" /></svg>
+              <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+            </button>
+            <div class="memo-waveform-container">
+              <canvas class="memo-waveform" id="waveform-1" aria-hidden="true"></canvas>
+              <div class="memo-progress-bar" id="progress-bar-1">
+                <div class="memo-progress-fill" id="progress-fill-1"></div>
+              </div>
+            </div>
+            <span class="memo-time" id="memo-time-1">0:00</span>
+          </div>
+          <audio id="audio-1" preload="metadata" src="assets/voice-memo-1.mp3"></audio>
+        </div>
+
+        <!-- Voice Memo 2 -->
+        <div class="voice-memo" id="voice-memo-2" data-memo="2">
+          <div class="memo-label">
+            <span class="memo-number">II</span>
+            <span class="memo-title">{{MEMO_2_LABEL}}</span>
+          </div>
+          <div class="memo-player">
+            <button class="memo-play-btn" id="play-btn-2" aria-label="Play voice memo 2">
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21" /></svg>
+              <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+            </button>
+            <div class="memo-waveform-container">
+              <canvas class="memo-waveform" id="waveform-2" aria-hidden="true"></canvas>
+              <div class="memo-progress-bar" id="progress-bar-2">
+                <div class="memo-progress-fill" id="progress-fill-2"></div>
+              </div>
+            </div>
+            <span class="memo-time" id="memo-time-2">0:00</span>
+          </div>
+          <audio id="audio-2" preload="metadata" src="assets/voice-memo-2.mp3"></audio>
+        </div>
+      </div>
+
+      <!-- ============================================ -->
+      <!-- CLOSING MOMENT                               -->
+      <!-- ============================================ -->
+      <div class="closing-section" id="closing-section">
+        <div class="closing-hearts" id="closing-hearts" aria-hidden="true">
+          <span>♡</span><span>♡</span><span>♡</span>
+        </div>
+        <p class="closing-line" id="closing-line">I love you — always have, always will.</p>
+        <button class="closing-replay-btn" id="replay-btn" aria-label="Read the letter again">
+          read it again
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
