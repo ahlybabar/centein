@@ -23,13 +23,13 @@ const CONFIG = {
   memos: [
     {
       id: 1,
-      src: "assets/to my future wife.m4a",
+      src: "to my future wife.m4a",
       title: "Audio #1",
       label: "A memory from that autumn evening"
     },
     {
       id: 2,
-      src: "assets/to my future wife (2) (1).m4a",
+      src: "to my future wife (2) (1).m4a",
       title: "Audio #2",
       label: "What I whisper before you fall asleep"
     }
